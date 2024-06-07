@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
@@ -20,17 +19,18 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/name")
 public class NameController {
 
-    @GetMapping("/")
+    @GetMapping("/get")
     public String getNameByGet(String name, HttpServletRequest request){
 //        String accessKey = request.getHeader("accessKey");
 //        String secretKey = request.getHeader("secretKey");
 //        if(!accessKey.equals("zzyy") || !secretKey.equals("zzzyy")){
 //            throw new RuntimeException("权限错误");
 //        }
+        System.out.println(request.getHeader("TEST"));
         return "GET 你的名字是：" + name;
     }
 
-    @PostMapping("/")
+    @PostMapping("/post")
     public String getNameByPost(@RequestParam String name){
         return "POST 你的名字是：" + name;
     }

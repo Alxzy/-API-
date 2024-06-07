@@ -24,6 +24,8 @@ import static com.zy.utils.SignUtils.getSign;
  */
 public class MyClient {
     // todo 捡漏校验
+
+    private static final String GATEWAY_HOST = "http://localhost:8090";
     private String accessKey;
     private String secretKey;
 
@@ -36,14 +38,14 @@ public class MyClient {
         //可以单独传入http参数，这样参数会自动做URL编码，拼接在URL中
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
-        String result = HttpUtil.get("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.get(GATEWAY_HOST + "/api/name/", paramMap);
         return result;
     }
 
     public String getNameByPost(String name){
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
-        String result = HttpUtil.post("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.post(GATEWAY_HOST + "/api/name/", paramMap);
         return result;
     }
 
@@ -69,7 +71,7 @@ public class MyClient {
     public String getUserNameByPost(User user){
         String jsonStr = JSONUtil.toJsonStr(user);
         // todo user对象属性 中文乱码
-        HttpResponse response = HttpRequest.post("http://localhost:8123/api/name/user")
+        HttpResponse response = HttpRequest.post(GATEWAY_HOST + "/api/name/user")
                 .charset(StandardCharsets.UTF_8)
                 .addHeaders(getHeaderMap(jsonStr))
                 .body(jsonStr)
